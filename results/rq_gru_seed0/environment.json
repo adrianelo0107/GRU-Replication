@@ -1,0 +1,9 @@
+{
+  "python": "3.11.5",
+  "torch": "2.2.2+cu121",
+  "numpy": "1.26.4",
+  "pandas": "2.2.3",
+  "cuda": "12.1",
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "scope": "Recorded environment subset; not a complete lockfile."
+}

@@ -1,0 +1,26 @@
+{
+  "id": "rq_gru_seed0_20261007",
+  "architecture": "pytorch_gru_last_state_linear",
+  "gate": "reset_after",
+  "layers": 2,
+  "hidden_dim": 32,
+  "input_dim": 6,
+  "outputs": [
+    1,
+    5,
+    10,
+    20
+  ],
+  "batchnorm": false,
+  "bias": true,
+  "dropout": 0.0,
+  "bidirectional": false,
+  "initial_hidden": "zero_each_window",
+  "initialization": "pytorch_default_uniform",
+  "loss": "masked_mse_only",
+  "seed": 0,
+  "labels": "original_unclipped",
+  "future_branch": false,
+  "graph": false,
+  "disclosure": "baseline_layers_width_shared_head_and_no_BN_are_explicit_completion_assumptions"
+}

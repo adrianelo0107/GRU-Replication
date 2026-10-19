@@ -1,0 +1,51 @@
+cff-version: 1.2.0
+message: "Please cite the GRU source paper and FactorGCL financial-baseline paper, and credit this unofficial independent implementation when using its code."
+title: "GRU-Replication: Unofficial financial GRU baseline on RQData (seed 0)"
+type: software
+authors:
+  - name: "adrianelo0107"
+repository-code: "https://github.com/adrianelo0107/GRU-Replication"
+url: "https://github.com/adrianelo0107/GRU-Replication"
+license: MIT
+preferred-citation:
+  type: conference-paper
+  title: "Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation"
+  authors:
+    - family-names: Cho
+      given-names: Kyunghyun
+    - family-names: van Merrienboer
+      given-names: Bart
+    - family-names: Gulcehre
+      given-names: Caglar
+    - family-names: Bahdanau
+      given-names: Dzmitry
+    - family-names: Bougares
+      given-names: Fethi
+    - family-names: Schwenk
+      given-names: Holger
+    - family-names: Bengio
+      given-names: Yoshua
+  year: 2014
+  collection-title: "Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP)"
+  start: 1724
+  end: 1734
+  doi: "10.3115/v1/D14-1179"
+  url: "https://aclanthology.org/D14-1179/"
+references:
+  - type: conference-paper
+    title: "FactorGCL: A Hypergraph-Based Factor Model with Temporal Residual Contrastive Learning for Stock Returns Prediction"
+    authors:
+      - family-names: Duan
+        given-names: Yitong
+      - family-names: Wang
+        given-names: Weiran
+      - family-names: Li
+        given-names: Jian
+    year: 2025
+    collection-title: "Proceedings of the AAAI Conference on Artificial Intelligence"
+    volume: 39
+    issue: 1
+    start: 173
+    end: 181
+    doi: "10.1609/aaai.v39i1.31993"
+    url: "https://ojs.aaai.org/index.php/AAAI/article/view/31993"

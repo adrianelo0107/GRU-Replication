@@ -1,0 +1,86 @@
+{
+  "run_id": "rq_gru_seed0_20261007",
+  "seed": 0,
+  "architecture": "PyTorch reset-after GRU, 2 layers, 32 units, last hidden state + shared four-output linear head; no BN/factor/graph/CL/future branch",
+  "parameters": 10308,
+  "folds": {
+    "fold_1": {
+      "epochs": 57,
+      "best_epoch": 37,
+      "bad_epochs": 20,
+      "validation_ic": 0.08477967302947517,
+      "prediction_rows": 7843384,
+      "test_days": 486,
+      "experiment_signature": "3555f8f2a0bdb4b83d601f29f2335fafc025abd4aa9d449f90e6257cc3d40616",
+      "cache_signature": "e92f47f8fcf229986ef1568c36e24ebe81ff4c99c5c9949afd27e575f203ed79",
+      "source_best_checkpoint_sha256": "9fd25dfe242c1910ad840fa32c8767fe261f27505d414d823063394580f789d1",
+      "published_model_state_sha256": "9a0cc69289453eb914a0056728fb25fe92bc2bc56d7f2f166860a8bb71d6945f"
+    },
+    "fold_2": {
+      "epochs": 51,
+      "best_epoch": 31,
+      "bad_epochs": 20,
+      "validation_ic": 0.05778889778125678,
+      "prediction_rows": 6777352,
+      "test_days": 360,
+      "experiment_signature": "6ec6ec0f620f146aeff77a05892579b49914d6ed46e233000fd3a37f116b4fb4",
+      "cache_signature": "e92f47f8fcf229986ef1568c36e24ebe81ff4c99c5c9949afd27e575f203ed79",
+      "source_best_checkpoint_sha256": "722ab1c384c764c03219549441d7e6d52123a8649fa862c9298d23bfe668a7fd",
+      "published_model_state_sha256": "39b58a230d3ec103a1d68ddf5385bfcc8cc107e943bb65cd41e162c2440b5243"
+    }
+  },
+  "test_days": 846,
+  "months": 42,
+  "date_horizon_keys": 3384,
+  "original_config_sha256": "86c2f498baa2373884d306dd16e1bd526de0a41327242bc29982679e219b165c",
+  "core_source_files": {
+    "code/factorgcl/__init__.py": {
+      "sha256": "a3f8e572d117e9a2c7af233743af316a345a2417680e825f8c46ec6e8aee0ce6",
+      "relationship": "byte-identical to the executed GRU shared-source snapshot"
+    },
+    "code/factorgcl/config.py": {
+      "sha256": "6dab90ce864cfa3b41f0d4ee3c47172d75895dc0b12027d569ffa40109738759",
+      "relationship": "byte-identical to the executed GRU shared-source snapshot"
+    },
+    "code/factorgcl/data.py": {
+      "sha256": "07a9158a536138ffc261e57d6ac17abcfc1b33a6d5eda49019a4fdeb5d9a9318",
+      "relationship": "byte-identical to the executed GRU shared-source snapshot"
+    },
+    "code/factorgcl/evaluation.py": {
+      "sha256": "a2bc843c90bc6866f7935e14256fe1f35bd25cecec29a41d5fcf363db0905412",
+      "relationship": "byte-identical to the executed GRU shared-source snapshot"
+    },
+    "code/factorgcl/training.py": {
+      "sha256": "802fbeb6101eb045822a69169fe0adff09aecbf9d0ff20b497d2a80700b12648",
+      "relationship": "byte-identical to the executed GRU shared-source snapshot"
+    },
+    "code/factorgcl/monitoring.py": {
+      "sha256": "c558455bbf1751c81d48d3fca35c8bbebcd337b47e7e35e27f0823ac40630a5c",
+      "relationship": "byte-identical to the executed GRU shared-source snapshot"
+    },
+    "code/factorgcl/models/temporal_contrastive.py": {
+      "sha256": "fa5034b27fd5d38e5ed66de6862023b3c6be619199abd1c063f0b5d25fc70c2f",
+      "relationship": "byte-identical to the executed GRU shared-source snapshot"
+    },
+    "code/factorgcl/reporting.py": {
+      "source_snapshot_sha256": "faef8e1759e099f74e82b5ec69a36c0341190dda4fde9acab9d77b87eb4d6076",
+      "relationship": "verbatim extraction of plot_training_loss only"
+    },
+    "code/factorgcl/models/gru.py": {
+      "source_snapshot_sha256": "daa534ee9cdba15588206f5c6a2a5cbf607d528225f9c49dcbcdebb032c269ed",
+      "relationship": "model, factory and independent reference-cell definitions unchanged; obsolete parent-project sys.path bootstrap removed"
+    },
+    "code/protocol.py": {
+      "source_snapshot_sha256": "842d9e0bb70c80bd7200a79c6640946c9fa451e0d1610fcc2dd4850e9abf9e8b",
+      "relationship": "historical signature and validation diagnostics retained; parent-project path bootstrap/base-config dependency replaced with standalone baseline checks"
+    }
+  },
+  "private_input_sha256": {
+    "panel.csv": "d4f5ad4035375ca171a0c3d1dcc7cacd6e91b16f530ea382ffb219aa8041adc8",
+    "stock_industry_sw2021.csv": "badcf2ce6d56eb3b7a32c54160c091329d43f0a90449149982a0686f6d704338",
+    "trading_calendar.csv": "0755a5094ce4a61afc0cd144e7ec71ed79b66d648a7deb7b5ec87dccbe55a87b",
+    "sw2021_l2_mapping.csv": "439779ea13f40b4ac9c29e8945a0b40b37a22590e2026ca5a005f75afac3dc67"
+  },
+  "repackaging": "Shared numerical engine/data/evaluation/loss sources are unchanged. Model definitions are unchanged apart from removing the parent-project import bootstrap. Standalone imports, paths, protocol checks and CLI were adapted. Best checkpoint tensors were extracted without optimizer/RNG/config state. Monthly metrics derive only from archived daily aggregates.",
+  "excluded": "Market data, calendars, industry assignments/dictionary, caches, stock-level predictions/returns/labels, full checkpoints, server/SSH tooling, internal reports and other experiments."
+}

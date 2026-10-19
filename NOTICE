@@ -1,0 +1,34 @@
+Unofficial, independent financial GRU replication maintained by adrianelo0107.
+This is not official author code. No affiliation or endorsement by the authors
+of either paper, their institutions, ACL, or AAAI is implied.
+
+GRU source paper:
+Kyunghyun Cho, Bart van Merrienboer, Caglar Gulcehre, Dzmitry Bahdanau,
+Fethi Bougares, Holger Schwenk, Yoshua Bengio (2014).
+Learning Phrase Representations using RNN Encoder-Decoder for Statistical
+Machine Translation. EMNLP 2014, pp. 1724-1734.
+https://aclanthology.org/D14-1179/
+https://doi.org/10.3115/v1/D14-1179
+https://arxiv.org/abs/1406.1078
+
+Financial baseline context:
+Yitong Duan, Weiran Wang, Jian Li (2025).
+FactorGCL: A Hypergraph-Based Factor Model with Temporal Residual Contrastive
+Learning for Stock Returns Prediction. AAAI 39(1), pp. 173-181.
+https://ojs.aaai.org/index.php/AAAI/article/view/31993
+https://doi.org/10.1609/aaai.v39i1.31993
+
+paper.pdf is the locally retained arXiv v3 GRU author version with appendices.
+references/FactorGCL-paper.pdf and references/FactorGCL-appendix.pdf are original
+reference documents with their original copyright notices preserved. The MIT
+license for this independent implementation does not relicense any of these PDFs.
+Consult the original publishers/rightsholders for their applicable terms.
+
+The software reproduces a financial GRU baseline on RQData, not the original
+machine-translation system or its BLEU experiments. Its PyTorch reset-after GRU
+differs from the reset-before encoder equations in the original GRU paper.
+The architecture and data substitutions are disclosed in both READMEs.
+
+No market/industry inputs, stock-level predictions with actual labels/returns,
+SSH credentials, deployment tools, or internal research reports are distributed.
+The software license grants no rights to third-party market or industry data.

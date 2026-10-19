@@ -1,0 +1,32 @@
+# Private/licensed inputs, raw-provider exports and generated caches
+/data/
+/outputs/
+**/predictions.csv
+*.parquet
+*.feather
+*.npy
+*.npz
+*.xlsx
+*.xls
+*.zip
+*.tar
+*.gz
+# Local environments, credentials and temporary files
+.env
+.env.*
+*.pem
+*.key
+*.pub
+.ssh/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.vscode/
+.idea/
+*.partial
+*.tmp
+*.log
+.DS_Store
+Thumbs.db

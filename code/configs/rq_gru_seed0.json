@@ -1,0 +1,113 @@
+{
+  "data": {
+    "panel_path": "data/panel.csv",
+    "calendar_path": "data/trading_calendar.csv",
+    "industry_path": "data/stock_industry_sw2021.csv",
+    "industry_dictionary_path": "data/sw2021_l2_mapping.csv",
+    "cache_dir": "data/cache_rq_gru_seed0",
+    "history_length": 60,
+    "future_length": 20,
+    "horizons": [
+      1,
+      5,
+      10,
+      20
+    ],
+    "missing_ratio_threshold": 0.2,
+    "clip_quantiles": [
+      0.001,
+      0.999
+    ],
+    "clip_reservoir_size": 200000,
+    "min_stocks": 2
+  },
+  "model": {
+    "name": "gru",
+    "prior_factors": 134,
+    "input_dim": 6,
+    "embedding_dim": 32,
+    "gru_layers": 2,
+    "hidden_factors": 32,
+    "projection_hidden_dim": 32,
+    "projection_output_dim": 32,
+    "negative_slope": 0.01,
+    "batchnorm_eps": 1e-05,
+    "batchnorm_momentum": 0.1,
+    "share_future_encoder": false,
+    "use_prior": false,
+    "use_hidden": false,
+    "use_alpha": true,
+    "use_cl": false
+  },
+  "training": {
+    "seed": 0,
+    "learning_rate": 0.001,
+    "adam_betas": [
+      0.9,
+      0.999
+    ],
+    "adam_eps": 1e-08,
+    "weight_decay": 0.0,
+    "max_epochs": 100,
+    "patience": 20,
+    "min_delta": 0.0,
+    "temperature": 0.1,
+    "contrastive_weight": 0.0,
+    "shuffle_dates": true,
+    "device": "cuda",
+    "cpu_threads": 4,
+    "contrastive_anchor_chunk": 512,
+    "output_dir": "outputs/rq_gru_seed0"
+  },
+  "folds": [
+    {
+      "name": "fold_1",
+      "train_start": "2014-01-01",
+      "train_end": "2018-12-31",
+      "valid_start": "2019-01-01",
+      "valid_end": "2019-12-31",
+      "test_start": "2020-01-01",
+      "test_end": "2021-12-31"
+    },
+    {
+      "name": "fold_2",
+      "train_start": "2016-01-01",
+      "train_end": "2020-12-31",
+      "valid_start": "2021-01-01",
+      "valid_end": "2021-12-31",
+      "test_start": "2022-01-01",
+      "test_end": "2023-06-30"
+    }
+  ],
+  "notes": {
+    "gru_protocol": {
+      "id": "rq_gru_seed0_20261007",
+      "architecture": "pytorch_gru_last_state_linear",
+      "gate": "reset_after",
+      "layers": 2,
+      "hidden_dim": 32,
+      "input_dim": 6,
+      "outputs": [
+        1,
+        5,
+        10,
+        20
+      ],
+      "batchnorm": false,
+      "bias": true,
+      "dropout": 0.0,
+      "bidirectional": false,
+      "initial_hidden": "zero_each_window",
+      "initialization": "pytorch_default_uniform",
+      "loss": "masked_mse_only",
+      "seed": 0,
+      "labels": "original_unclipped",
+      "future_branch": false,
+      "graph": false,
+      "disclosure": "baseline_layers_width_shared_head_and_no_BN_are_explicit_completion_assumptions"
+    },
+    "sources": "Cho et al. 2014 paper.pdf (including appendices); references/FactorGCL-paper.pdf; references/FactorGCL-appendix.pdf.",
+    "baseline_completion": "2 layers,32 hidden,no BN,shared 4-horizon linear,bias true,dropout0,zero per window,PyTorch default init. use_alpha is inactive shared-validator metadata.",
+    "data": "Same frozen new-RQ reconstructed VWAP panel,unchanged labels/splits; full training scaler newly fitted; no pretrained weights."
+  }
+}
