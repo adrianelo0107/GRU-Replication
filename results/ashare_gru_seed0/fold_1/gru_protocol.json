@@ -1,5 +1,5 @@
 {
-  "id": "rq_gru_seed0_20261007",
+  "id": "ashare_gru_seed0_20261007",
   "architecture": "pytorch_gru_last_state_linear",
   "gate": "reset_after",
   "layers": 2,

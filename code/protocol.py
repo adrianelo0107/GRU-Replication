@@ -6,9 +6,9 @@ from factorgcl.config import load_config, resolve_path
 from factorgcl import training as engine
 from factorgcl.models import make_model
 
-CONFIG = 'code/configs/rq_gru_seed0.json'
-RUN = 'outputs/rq_gru_seed0'
-SPEC = dict(id='rq_gru_seed0_20261007', architecture='pytorch_gru_last_state_linear',
+CONFIG = 'code/configs/ashare_gru_seed0.json'
+RUN = 'outputs/ashare_gru_seed0'
+SPEC = dict(id='ashare_gru_seed0_20261007', architecture='pytorch_gru_last_state_linear',
             gate='reset_after', layers=2, hidden_dim=32, input_dim=6, outputs=[1, 5, 10, 20],
             batchnorm=False, bias=True, dropout=0., bidirectional=False, initial_hidden='zero_each_window',
             initialization='pytorch_default_uniform', loss='masked_mse_only', seed=0,

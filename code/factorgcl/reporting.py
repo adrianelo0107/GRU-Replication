@@ -1,4 +1,4 @@
-"""Training-loss plotting used by the RQ seed-42 baseline."""
+"""Training-loss plotting used by the A-share financial GRU seed-0 baseline."""
 import pandas as pd
 from .config import resolve_path
 

@@ -1,4 +1,4 @@
-"""Portable extraction of the archived RQ common-OHLC-factor VWAP method.
+"""Portable extraction of the archived common-OHLC-factor VWAP method.
 
 Inputs are already cleaned, uniquely keyed, sorted CSVs. This utility does not
 download or redistribute any data and does not recreate the raw-provider export.
@@ -39,7 +39,7 @@ def estimate_factor(new, old):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--adjusted', required=True, help='Cleaned RQ adjusted OHLC/volume/total_turnover CSV.')
+    parser.add_argument('--adjusted', required=True, help='Cleaned forward-adjusted A-share daily OHLC/volume/total_turnover CSV.')
     parser.add_argument('--unadjusted', required=True, help='Same-key unadjusted OHLC/volume/total_turnover CSV.')
     parser.add_argument('--output', required=True)
     args = parser.parse_args()

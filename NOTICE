@@ -24,7 +24,7 @@ reference documents with their original copyright notices preserved. The MIT
 license for this independent implementation does not relicense any of these PDFs.
 Consult the original publishers/rightsholders for their applicable terms.
 
-The software reproduces a financial GRU baseline on RQData, not the original
+The software reproduces a financial GRU baseline on forward-adjusted A-share daily data, not the original
 machine-translation system or its BLEU experiments. Its PyTorch reset-after GRU
 differs from the reset-before encoder equations in the original GRU paper.
 The architecture and data substitutions are disclosed in both READMEs.

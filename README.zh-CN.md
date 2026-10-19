@@ -4,7 +4,7 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-本仓库仅发布已完成的**RQ数据金融GRU基线、seed=0**，历史来源为`rq_gru_seed0_20261007`。目标是复现**FactorGCL附录描述的股票收益预测GRU基线**，不涉及原始GRU论文的机器翻译训练或BLEU实验。本仓库没有seed42实验结果。
+本仓库仅发布已完成的**金融GRU基线、seed=0**，使用A股日频数据（前复权），归档标识为`ashare_gru_seed0_20261007`。目标是复现**FactorGCL附录描述的股票收益预测GRU基线**，不涉及原始GRU论文的机器翻译训练或BLEU实验。本仓库没有seed42实验结果。
 
 ## 原论文与署名
 
@@ -34,9 +34,9 @@
 | 10 | 0.064562 | 0.729079 | 1.011559 | 0.524230 |
 | 20 | 0.069904 | 0.812965 | 1.013363 | 0.515359 |
 
-![金融GRU seed0样本外指标](results/rq_gru_seed0/figures/main_results.png)
+![金融GRU seed0样本外指标](results/ashare_gru_seed0/figures/main_results.png)
 
-[完整训练与验证曲线](results/rq_gru_seed0/figures/training_history.png) · [42个月IC](results/rq_gru_seed0/figures/monthly_ic.png)
+[完整训练与验证曲线](results/ashare_gru_seed0/figures/training_history.png) · [42个月IC](results/ashare_gru_seed0/figures/monthly_ic.png)
 
 IC为有效标签截面逐日Pearson相关系数均值；ICIR为日IC均值除以总体标准差（`ddof=0`），不年化。MSE为截面标准化标签上的逐日MSE等权均值，另保存pooled MSE。F1汇总预测与**标准化标签**的严格正负符号TP/FP/FN，不是对原始收益是否大于0分类；零符号另计。总样本外指标由两折日度记录拼接重算，不直接平均两折ICIR/F1。月度仅事后描述，单seed结果不能证明稳健性或与FactorGCL的稳定排序。
 
@@ -56,7 +56,7 @@ IC为有效标签截面逐日Pearson相关系数均值；ICIR为日IC均值除�
 
 **结构补全。** FactorGCL金融基线仅描述GRU接线性预测层；两层32维、不加BN、共享四期限头、初始化等未披露细节均为明确标注的实现选择，不能当作作者已完整披露的参数。PyTorch采用**reset-after**候选状态公式，而原GRU论文的编码器公式为reset-before；本实现不声称逐公式完全复现原编码器。提供独立门控展开并与PyTorch核对。
 
-**VWAP与数据来源。** 沿用当次RQ前复权快照与重建VWAP。同股同日四个调整前后OHLC，在四位小数共同舍入区间（半单位`0.00005`）内做无截距约束最小二乘，计算`估计乘数 × 新成交额 / 旧未复权成交量`。要求新旧成交额一致，新RQ量仍作为量特征保留。重建值同时进入特征和收益标签，是估计值而非供应商精确复权因子；不夹到高低价内，工具沿用历史`0.011`容差拒绝显著越界。
+**数据与预处理。** 使用A股日频数据（前复权）。输入区间2013-10-10至2023-07-31，正式信号区间2014-01-01至2023-06-30，测试区间2020-01-01至2023-06-30。同股同日四个调整前后OHLC，在四位小数共同舍入区间（半单位`0.00005`）内做无截距约束最小二乘，计算`估计乘数 × 新成交额 / 旧未复权成交量`。要求新旧成交额一致，原成交量仍作为量特征保留。重建值同时进入特征和收益标签，是估计值而非供应商精确复权因子；不夹到高低价内，工具沿用历史`0.011`容差拒绝显著越界。
 
 未使用后来增加的ST、停复牌或交易状态筛选，也没有持有路径可交易性筛选；端点价格有效且为正即参与标签资格判断。前复权基准日未知，静态行业并非完整时点可得。共享加载器仍用**134行业的资格映射**保留原样本，但GRU不使用行业图暴露作为输入；FactorGCL原论文为83行业。数据、样本与实现补全差异限制与论文的直接数值比较，不能视为可投资回测。
 
@@ -68,14 +68,14 @@ references/                      FactorGCL原论文与附录
 README.md / README.zh-CN.md       中英说明
 CITATION.cff / NOTICE / LICENSE   引用、署名和许可范围
 requirements.txt                 原运行依赖版本
-code/configs/rq_gru_seed0.json    可移植seed0配置
+code/configs/ashare_gru_seed0.json    可移植seed0配置
 code/factorgcl/                   共享数值引擎与FinancialGRU
 code/protocol.py / code/train.py  独立金融基线协议与运行入口
 code/reconstruct_vwap.py          私有同键OHLC输入的重建工具
 code/verify_results.py            无需行情的文件/指标/轮次/模型核验
 code/smoke_test.py                临时合成数据CPU训练/恢复/门控检查
 code/plot_results.py              仅绘制本次GRU结果
-results/rq_gru_seed0/             实际汇总结果、scaler和best模型tensor
+results/ashare_gru_seed0/             实际汇总结果、scaler和best模型tensor
 SHA256SUMS.json                   发布文件SHA-256清单
 ```
 
@@ -83,7 +83,7 @@ SHA256SUMS.json                   发布文件SHA-256清单
 
 `model_state.pt`从原best提取，**仅含模型tensor**，支持`torch.load(..., weights_only=True)`；不含优化器、RNG或完整配置，不能恢复原历史训练。推理仍需匹配scaler及预处理/样本构造。
 
-共享训练/数据/评估/损失源码与原执行版本SHA-256一致并保留；模型、工厂及参考门控定义不变，仅移除父项目路径引导。独立入口、导入、路径和协议检查作适配，历史签名与只读验证诊断保留。见[provenance.json](results/rq_gru_seed0/provenance.json)。新克隆能核验仓库产物，不能凭输入指纹独立恢复未公开行情或逐股票预测。
+共享训练/数据/评估/损失源码与原执行版本SHA-256一致并保留；模型、工厂及参考门控定义不变，仅移除父项目路径引导。独立入口、导入、路径和协议检查作适配，只读验证诊断保留。公开路径和协议标识使用统一名称，保存的原实验签名标识历史运行，新训练生成自己的checkpoint签名。见[provenance.json](results/ashare_gru_seed0/provenance.json)。新克隆能核验仓库产物，不能凭输入指纹独立恢复未公开行情或逐股票预测。
 
 ## 安装与无数据核验
 
@@ -103,7 +103,7 @@ python -B code/plot_results.py --output-dir outputs/figures
 
 ## 自备输入并训练
 
-**不提供任何数据**：行情、日历、行业映射/字典、缓存、逐股票实际标签/收益均不上传，也不含下载凭据或供应商下载脚本。请通过授权渠道自行获得，在被Git忽略的`data/`内准备：
+**不提供任何数据**：行情、日历、行业映射/字典、缓存、逐股票实际标签/收益均不上传，也不附带下载凭据。请在被Git忽略的`data/`内自行准备：
 
 | 文件 | 必需字段/约定 |
 |---|---|
@@ -123,7 +123,7 @@ python -B code/train.py
 python -B code/train.py --fold fold_1 --resume
 ```
 
-两折串行输出到新的`outputs/rq_gru_seed0/`，禁止训练覆盖发布的`results/`。可加`--device cpu`或`--device auto`。恢复需该次新运行自己的完整`last.pt`，包含优化器/scaler/RNG；不能用发布的纯权重代替。缓存签名含输入元数据，移动或重新生成输入后可能需另建缓存。
+两折串行输出到新的`outputs/ashare_gru_seed0/`，禁止训练覆盖发布的`results/`。可加`--device cpu`或`--device auto`。恢复需该次新运行自己的完整`last.pt`，包含优化器/scaler/RNG；不能用发布的纯权重代替。缓存签名含输入元数据，移动或重新生成输入后可能需另建缓存。
 
 ## 引用与许可
 

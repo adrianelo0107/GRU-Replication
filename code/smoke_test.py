@@ -62,7 +62,7 @@ def main():
         for name, values in arrays.items():
             np.save(cache / (name + '.npy'), values, allow_pickle=False)
         (cache / 'manifest.json').write_text(json.dumps({'shape':[days,stocks,6], 'feature_order':['high','open','low','close','vwap','volume'], 'signature':'synthetic-only-not-a-financial-experiment', 'request':{'stock_limit':stocks}}), encoding='utf-8')
-        cfg = load_config('code/configs/rq_gru_seed0.json')
+        cfg = load_config('code/configs/ashare_gru_seed0.json')
         cfg.data.cache_dir = str(cache)
         cfg.training.device = 'cpu'
         cfg.training.cpu_threads = 1

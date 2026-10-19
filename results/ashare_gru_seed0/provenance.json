@@ -1,5 +1,4 @@
 {
-  "run_id": "rq_gru_seed0_20261007",
   "seed": 0,
   "architecture": "PyTorch reset-after GRU, 2 layers, 32 units, last hidden state + shared four-output linear head; no BN/factor/graph/CL/future branch",
   "parameters": 10308,
@@ -82,5 +81,7 @@
     "sw2021_l2_mapping.csv": "439779ea13f40b4ac9c29e8945a0b40b37a22590e2026ca5a005f75afac3dc67"
   },
   "repackaging": "Shared numerical engine/data/evaluation/loss sources are unchanged. Model definitions are unchanged apart from removing the parent-project import bootstrap. Standalone imports, paths, protocol checks and CLI were adapted. Best checkpoint tensors were extracted without optimizer/RNG/config state. Monthly metrics derive only from archived daily aggregates.",
-  "excluded": "Market data, calendars, industry assignments/dictionary, caches, stock-level predictions/returns/labels, full checkpoints, server/SSH tooling, internal reports and other experiments."
+  "excluded": "Market data, calendars, industry assignments/dictionary, caches, stock-level predictions/returns/labels, full checkpoints, server/SSH tooling, internal reports and other experiments.",
+  "archive_id": "ashare_gru_seed0_20261007",
+  "publication_naming": "Dataset labels, public paths and protocol identifiers use neutral A-share names. Archived source signatures identify the executed experiment; new standalone training generates its own checkpoint signatures. Numerical metrics, training records, scalers and model tensors are unchanged."
 }

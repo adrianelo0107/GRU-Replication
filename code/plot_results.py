@@ -1,4 +1,4 @@
-"""Plot only the published RQ seed-0 aggregate results."""
+"""Plot only the published A-share seed-0 aggregate results."""
 import argparse
 from pathlib import Path
 import json
@@ -18,7 +18,7 @@ def main():
     if not out.is_absolute():
         out = ROOT / out
     out.mkdir(parents=True, exist_ok=True)
-    base = ROOT / 'results/rq_gru_seed0'
+    base = ROOT / 'results/ashare_gru_seed0'
     metrics = json.loads((base / 'oos_metrics.json').read_text())
     horizons = [1, 5, 10, 20]
     plt.rcParams.update({'font.size':10, 'axes.spines.top':False, 'axes.spines.right':False})
@@ -31,7 +31,7 @@ def main():
         ax.set_ylabel(key.upper())
         ax.grid(axis='y', alpha=.2)
         ax.set_axisbelow(True)
-    fig.suptitle('Unofficial financial GRU replication | RQ baseline, seed 0')
+    fig.suptitle('Unofficial financial GRU replication | A-share baseline, seed 0')
     fig.tight_layout()
     fig.savefig(out / 'main_results.png', dpi=180)
     plt.close(fig)
@@ -52,7 +52,7 @@ def main():
         for row in range(2):
             axes[row,col].axvline(result['best_epoch'], color='gray', linestyle=':', linewidth=1)
             axes[row,col].grid(alpha=.2)
-    fig.suptitle('RQ seed 0 | complete training and validation histories')
+    fig.suptitle('A-share seed 0 | complete training and validation histories')
     fig.tight_layout()
     fig.savefig(out / 'training_history.png', dpi=180)
     plt.close(fig)
@@ -63,7 +63,7 @@ def main():
     ax.axhline(0, color='gray', linewidth=.8)
     ax.set_ylabel('Mean daily cross-sectional IC')
     ax.set_xlabel('Test month')
-    ax.set_title('RQ seed 0 | 42 test months (descriptive evaluation)')
+    ax.set_title('A-share seed 0 | 42 test months (descriptive evaluation)')
     ax.legend(ncol=4, fontsize=9)
     ax.grid(alpha=.2)
     fig.tight_layout()

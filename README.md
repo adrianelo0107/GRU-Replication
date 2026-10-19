@@ -4,7 +4,7 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-This repository publishes the completed **RQData financial GRU baseline, seed 0**, from the local run `rq_gru_seed0_20261007`. It is a replication of the **stock-return prediction baseline described in FactorGCL**, not the machine-translation experiments of the original GRU paper. Only this experiment is included; there is no seed-42 result in this release.
+This repository publishes the completed **financial GRU baseline, seed 0**, using forward-adjusted A-share daily data, archived as `ashare_gru_seed0_20261007`. It is a replication of the **stock-return prediction baseline described in FactorGCL**, not the machine-translation experiments of the original GRU paper. Only this experiment is included; there is no seed-42 result in this release.
 
 ## Papers and attribution
 
@@ -34,9 +34,9 @@ The test period is January 2020–June 2023: **846 signal days, 42 months, 3,384
 | 10 | 0.064562 | 0.729079 | 1.011559 | 0.524230 |
 | 20 | 0.069904 | 0.812965 | 1.013363 | 0.515359 |
 
-![RQ financial GRU seed-0 metrics](results/rq_gru_seed0/figures/main_results.png)
+![A-share financial GRU seed-0 metrics](results/ashare_gru_seed0/figures/main_results.png)
 
-[Complete training/validation histories](results/rq_gru_seed0/figures/training_history.png) · [42-month IC](results/rq_gru_seed0/figures/monthly_ic.png)
+[Complete training/validation histories](results/ashare_gru_seed0/figures/training_history.png) · [42-month IC](results/ashare_gru_seed0/figures/monthly_ic.png)
 
 IC is mean daily cross-sectional Pearson correlation on valid labels. ICIR divides that mean by the population standard deviation of daily IC (`ddof=0`), without annualization. MSE averages daily MSE against cross-sectionally standardized labels; pooled MSE is retained separately. F1 pools strict positive/negative sign counts for predictions and **standardized labels**, rather than classifying positive raw returns; zero signs are tracked separately. Combined metrics are recomputed from concatenated daily records, not by averaging fold-level ICIR/F1. Monthly metrics are descriptive test-period evaluations. A single seed does not establish robustness or a stable ranking against FactorGCL.
 
@@ -56,7 +56,7 @@ IC is mean daily cross-sectional Pearson correlation on valid labels. ICIR divid
 
 **Architecture disclosure.** FactorGCL describes its financial baseline as GRU plus a linear predictor. Two layers, 32 units, no extra BN, a shared four-horizon head, initialization and other unspecified settings are explicit reproduction choices, not claims of fully disclosed author settings. PyTorch uses a **reset-after** candidate-state formulation, whereas the original GRU paper's encoder equations use reset-before; this repository does not claim literal equation-for-equation reproduction of the original encoder. An independent gate expansion is supplied and checked against PyTorch.
 
-**RQ/VWAP disclosure.** The baseline uses the same pre-adjusted RQ snapshot and reconstructed VWAP as the earlier RQ FactorGCL baseline. A same-stock/date multiplier is estimated from the four adjusted/unadjusted OHLC prices by constrained no-intercept least squares within their common four-decimal rounding intervals (half-unit `0.00005`). Reconstructed VWAP is `estimated_factor × new_turnover / old_unadjusted_volume`. New/old turnover must match; the new RQ volume remains the volume feature. This estimated VWAP enters both features and labels. It is not a provider-supplied factor, is not clamped to high/low, and the portable utility rejects material range violations using the archived `0.011` tolerance.
+**Data and preprocessing.** The baseline uses forward-adjusted A-share daily data. Inputs cover 2013-10-10–2023-07-31; formal signals cover 2014-01-01–2023-06-30 and the test interval is 2020-01-01–2023-06-30. A same-stock/date multiplier is estimated from the four adjusted/unadjusted OHLC prices by constrained no-intercept least squares within their common four-decimal rounding intervals (half-unit `0.00005`). Reconstructed VWAP is `estimated_factor × new_turnover / old_unadjusted_volume`. New/old turnover must match; the recorded volume remains the volume feature. This estimated VWAP enters both features and labels. It is not a provider-supplied factor, is not clamped to high/low, and the portable utility rejects material range violations using the archived `0.011` tolerance.
 
 There is no later ST/suspension/status screen or holding-path tradability check. Endpoint labels use available positive prices. The pre-adjusted snapshot's base date is unknown and the latest static industry classifications are not point-in-time. The shared loader retains the **134-industry eligibility mapping** to preserve the historical sample, although the GRU does not consume industry/graph exposures. FactorGCL's original experiment uses 83 industries. Data, sample construction and unspecified settings prevent a like-for-like numerical reproduction claim or an investable-backtest interpretation.
 
@@ -68,14 +68,14 @@ references/                      FactorGCL paper and appendix
 README.md / README.zh-CN.md       English / Chinese documentation
 CITATION.cff / NOTICE / LICENSE   Attribution, citation, licensing scope
 requirements.txt                 Original-run dependency pins
-code/configs/rq_gru_seed0.json    Portable seed-0 experiment configuration
+code/configs/ashare_gru_seed0.json    Portable seed-0 experiment configuration
 code/factorgcl/                   Shared numerical engine + FinancialGRU
 code/protocol.py / code/train.py  Standalone financial-baseline protocol and CLI
 code/reconstruct_vwap.py          Utility for privately prepared same-key OHLC files
 code/verify_results.py            Data-free checksums/metrics/epoch/model verification
 code/smoke_test.py                Temporary synthetic CPU training/resume/gate check
 code/plot_results.py              Plot only this archived GRU experiment
-results/rq_gru_seed0/             Actual aggregate results, scalers, best model tensors
+results/ashare_gru_seed0/             Actual aggregate results, scalers, best model tensors
 SHA256SUMS.json                   Distributed-file SHA-256 manifest
 ```
 
@@ -83,7 +83,7 @@ Published results include combined/fold daily metrics, four-horizon metrics, 42-
 
 `model_state.pt` files contain **model tensors only**, extracted from the original best checkpoints, and support `torch.load(..., weights_only=True)`. Optimizer/RNG/config state is omitted; these files cannot resume the historical run. Inference needs the matching fold scaler and compatible preprocessing/sample construction.
 
-Shared training/data/evaluation/loss files were matched to the original execution's SHA-256 snapshot and copied unchanged. Model/factory/reference-cell definitions are unchanged; only their obsolete parent-project import bootstrap was removed. Standalone CLI/imports/paths/protocol checks were adapted; historical checkpoint signatures and read-only validation diagnostics are retained. See [provenance.json](results/rq_gru_seed0/provenance.json). A fresh clone can verify the published artifacts, not independently reconstruct omitted market data or stock-level predictions.
+Shared training/data/evaluation/loss files were matched to the original execution's SHA-256 snapshot and copied unchanged. Model/factory/reference-cell definitions are unchanged; only their obsolete parent-project import bootstrap was removed. Standalone CLI/imports/paths/protocol checks were adapted; read-only validation diagnostics are retained. Public paths and protocol identifiers use neutral names; the archived source signatures identify the original run and new training generates its own checkpoint signatures. See [provenance.json](results/ashare_gru_seed0/provenance.json). A fresh clone can verify the published artifacts, not independently reconstruct omitted market data or stock-level predictions.
 
 ## Install and verify without data
 
@@ -103,7 +103,7 @@ Activate the environment before installing. For CUDA, install a suitable officia
 
 ## Private inputs and training
 
-**No data are distributed**: no market panels, calendars, industry assignments/dictionaries, caches, stock-level true labels/returns, API credentials, or provider download scripts. Obtain required inputs through an authorized provider. Place compatible prepared CSVs in ignored `data/`:
+**No data are distributed**: no market panels, calendars, industry assignments/dictionaries, caches, stock-level true labels/returns, API credentials, or download scripts. Prepare compatible inputs with the following schema. Place compatible prepared CSVs in ignored `data/`:
 
 | File | Required fields / convention |
 |---|---|
@@ -123,7 +123,7 @@ python -B code/train.py
 python -B code/train.py --fold fold_1 --resume
 ```
 
-Both folds run serially into new `outputs/rq_gru_seed0/`; the published `results/` archive is protected from training overwrite. Use `--device cpu` or `--device auto` as needed. Resume requires the new run's own full `last.pt` with optimizer/scaler/RNG, not the released tensor-only weights. A regenerated/moved input may require a new cache because cache signatures include file metadata.
+Both folds run serially into new `outputs/ashare_gru_seed0/`; the published `results/` archive is protected from training overwrite. Use `--device cpu` or `--device auto` as needed. Resume requires the new run's own full `last.pt` with optimizer/scaler/RNG, not the released tensor-only weights. A regenerated/moved input may require a new cache because cache signatures include file metadata.
 
 ## Citation and licensing
 

@@ -1,4 +1,4 @@
-"""Train the archived RQ financial GRU baseline, seed 0, in a standalone repo."""
+"""Train the archived A-share financial GRU baseline, seed 0, in a standalone repo."""
 import argparse
 import json
 from protocol import CONFIG, check_protocol, install_runtime, engine

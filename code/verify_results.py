@@ -32,8 +32,8 @@ def main():
         path = ROOT / name
         if hashlib.sha256(path.read_bytes()).hexdigest() != expected:
             raise ValueError(f'SHA-256 mismatch: {name}')
-    base = ROOT / 'results/rq_gru_seed0'
-    config = load_config('code/configs/rq_gru_seed0.json')
+    base = ROOT / 'results/ashare_gru_seed0'
+    config = load_config('code/configs/ashare_gru_seed0.json')
     daily = pd.read_csv(base / 'oos_daily_metrics.csv')
     if daily.duplicated(['date', 'horizon']).any() or daily.date.nunique() != 846 or len(daily) != 3384:
         raise ValueError('Unexpected OOS coverage or duplicate keys.')

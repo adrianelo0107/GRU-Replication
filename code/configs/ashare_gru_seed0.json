@@ -4,7 +4,7 @@
     "calendar_path": "data/trading_calendar.csv",
     "industry_path": "data/stock_industry_sw2021.csv",
     "industry_dictionary_path": "data/sw2021_l2_mapping.csv",
-    "cache_dir": "data/cache_rq_gru_seed0",
+    "cache_dir": "data/cache_ashare_gru_seed0",
     "history_length": 60,
     "future_length": 20,
     "horizons": [
@@ -57,7 +57,7 @@
     "device": "cuda",
     "cpu_threads": 4,
     "contrastive_anchor_chunk": 512,
-    "output_dir": "outputs/rq_gru_seed0"
+    "output_dir": "outputs/ashare_gru_seed0"
   },
   "folds": [
     {
@@ -81,7 +81,7 @@
   ],
   "notes": {
     "gru_protocol": {
-      "id": "rq_gru_seed0_20261007",
+      "id": "ashare_gru_seed0_20261007",
       "architecture": "pytorch_gru_last_state_linear",
       "gate": "reset_after",
       "layers": 2,
@@ -108,6 +108,6 @@
     },
     "sources": "Cho et al. 2014 paper.pdf (including appendices); references/FactorGCL-paper.pdf; references/FactorGCL-appendix.pdf.",
     "baseline_completion": "2 layers,32 hidden,no BN,shared 4-horizon linear,bias true,dropout0,zero per window,PyTorch default init. use_alpha is inactive shared-validator metadata.",
-    "data": "Same frozen new-RQ reconstructed VWAP panel,unchanged labels/splits; full training scaler newly fitted; no pretrained weights."
+    "data": "Same frozen forward-adjusted A-share reconstructed VWAP panel,unchanged labels/splits; full training scaler newly fitted; no pretrained weights."
   }
 }

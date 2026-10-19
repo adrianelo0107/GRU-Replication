@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "Please cite the GRU source paper and FactorGCL financial-baseline paper, and credit this unofficial independent implementation when using its code."
-title: "GRU-Replication: Unofficial financial GRU baseline on RQData (seed 0)"
+title: "GRU-Replication: Unofficial financial GRU baseline on forward-adjusted A-share daily data (seed 0)"
 type: software
 authors:
   - name: "adrianelo0107"
